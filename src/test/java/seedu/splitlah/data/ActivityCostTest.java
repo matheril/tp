@@ -18,17 +18,17 @@ public class ActivityCostTest {
 
     // Getter and setter tests
     @Test
-    public void getActivityId_returnsActivityId() {
+    public void getActivityId_activityIdIsOne_returnsOne() {
         assertEquals(1, activityCost.getActivityId());
     }
 
     @Test
-    public void getCostPaid_returnsCostPaid() {
+    public void getCostPaid_costPaidIsTen_returnsTen() {
         assertEquals(10, activityCost.getCostPaid());
     }
 
     @Test
-    public void getCostOwed_returnsCostOwed()  {
+    public void getCostOwed_costOwedIsHundred_returnsHundred() {
         assertEquals(100, activityCost.getCostOwed());
     }
 }
