@@ -434,8 +434,7 @@ There are 2 ways that you can edit an activity:
    and 2 digits after the decimal point, if any.
 >- The values in `[GST_PERCENTAGE]` and `[SERVICE_CHARGE]` are decimal values that can only range from 0 to 100,
    with a maximum of 3 digits before and 2 after the decimal point, if any.
->- Given that the values can only be displayed up to 2 decimal places, rounding errors may seem to have occurred
->  in the calculations.
+>- A session with a unique identifier of `[SESSION_ID]` has to exist before an activity can be created and assigned to
 >
 > **⚠️Warnings:**
 >- All fields must be supplied in the command, not just the ones you wish to edit.
