@@ -1,14 +1,8 @@
-# Tan Ivan - Project Portfolio Page
-
-## Project - SplitLah
-<hr>
-SplitLah is a Command Line (CLI) program that is written in Java and meant to run on `Java 11` . SplitLah is an 
-application for keeping track of expenses during group outing sessions, specifically for those 
-who are budget conscious. It then proceeds to split the expenses according to the group members' individual costs for 
-the activities they participated in, for a particular session.
+---
+title: Tan Ivan - Project Portfolio Page
+---
 
 ## Summary of Contributions
-<hr>
 
 ### Code Contributions
 Code contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=&sort=totalCommits%20dsc&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=ivanaitzliddat&tabRepo=AY2122S2-CS2113T-T10-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
@@ -19,8 +13,6 @@ Code contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
 * [Activity Create](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/ActivityCreateCommand.java)
   * What it does: Allows users to create activities in the application.
   * Justification: This feature allows users to record the details of each activity within a particular outing and keep track of the expenditure.
-  * Highlights: This was slightly challenging because of the number of arguments and delimiters that has to be properly handled before actually creating an activity.
-                Furthermore, there are optional arguments to consider.
 * [Activity Delete](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/ActivityDeleteCommand.java)
   * What it does: Allows users to delete activities in the application.
   * Justification: This feature allows users to remove unnecessary activities that were previously created.
@@ -36,15 +28,14 @@ Code contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
   * These include [ActivityCreateCommandParser](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/commandparser/ActivityCreateCommandParser.java),
     [ActivityDeleteCommandParser](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/commandparser/ActivityDeleteCommandParser.java) and
     [GroupViewCommandParser](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/commandparser/GroupViewCommandParser.java) classes.
+
 #### Testing
 * Added JUnit tests for [Activity](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/data/ActivityTest.java),
   [ActivityCreateCommand](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/command/ActivityCreateCommandTest.java) and
   [ActivityDeleteCommand](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/command/ActivityDeleteCommandTest.java) classes.
-  * Ensure each Junit Test achieved at least 90% coverage.
 * Added JUnit tests for [ActivityCreateCommandParser](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/parser/commandparser/ActivityCreateCommandParserTest.java),
   [ActivityDeleteCommandParser](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/parser/commandparser/ActivityDeleteCommandParserTest.java) and
   [GroupViewCommandParser](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/parser/commandparser/GroupViewCommandParserTest.java) classes.
-  * Ensure each Junit Test achieved 100% method and line coverage.
 
 ### Documentation Contributions
 Documentation Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=&sort=totalCommits%20dsc&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=ivanaitzliddat&tabRepo=AY2122S2-CS2113T-T10-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs&authorshipIsBinaryFileTypeChecked=false)
