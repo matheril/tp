@@ -15,8 +15,8 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 /text-ui-test/ACTUAL.TXT
-/text-ui-test/EXPECTED-UNIX.txt
 /text-ui-test/EXPECTED-UNIX.TXT
+/text-ui-test/EXPECTED-UNIX.txt
 
 # Storage files
 /data/

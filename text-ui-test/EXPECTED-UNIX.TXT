@@ -1,0 +1,122 @@
+The data file was not found or has been corrupted. No saves were loaded into SplitLah.
+============================================================
+ $$$$$$\            $$\ $$\   $$\     $$\           $$\
+$$  $$\           $$ |\|  $$ |    $$ |          $$ |
+$$ /  \__| $$$$$$\  $$ |$$\ $$$$$$\   $$ | $$$$$$\  $$$$$$$\
+\$$$$$$\  $$  $$\ $$ |$$ |\_$$  _|  $$ | \____$$\ $$  __$$\
+ \____$$\ $$ /  $$ |$$ |$$ |  $$ |    $$ | $$$$$$$ |$$ |  $$ |
+$$\   $$ |$$ |  $$ |$$ |$$ |  $$ |$$\ $$ |$$  __$$ |$$ |  $$ |
+\$$$$$$  |$$$$$$$  |$$ |$$ |  \$$$$  |$$ |\$$$$$$$ |$$ |  $$ |
+ \______/ $$  ____/ \|\__|   \____/ \__| \_______|\__|  \__|
+          $$ |
+          $$ |
+          \__|
+Welcome to SplitLah!
+============================================================
+> HELP MENU --
+1.  Create a new session
+        Syntax: session /create /n [SESSION_NAME] /d [SESSION_DATE] {/pl [NAME1 NAME2...] /gid [GROUP_ID]}
+2.  Delete an existing session
+        Syntax: session /delete /sid [SESSION_ID]
+3.  Edit an existing session
+        Syntax: session /edit /sid [SESSION_ID] {</n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2...]}
+4.  View an existing session's details
+        Syntax: session /view /sid [SESSION_ID]
+5.  List all existing sessions
+        Syntax: session /list
+6.  Create a new activity
+        Syntax: activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2...] /co [TOTAL_COST] [</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]
+                activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2...] /cl [COST1 COST2...] [</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]
+7.  Delete an existing activity
+        Syntax: activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]
+8.  Edit an existing activity
+        Syntax: activity /edit /sid [SESSION_ID] /aid [ACTIVITY_ID] {/n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2...] /co <TOTAL_COST> /gst [GST_PERCENT] /sc [SERVICE_CHARGE]}
+        Syntax: activity /edit /sid [SESSION_ID] /aid [ACTIVITY_ID] {/n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2...] /cl [COST1 COST2...] /gst [GST_PERCENT] /sc [SERVICE_CHARGE>]}
+9.  View an existing activity's details
+        Syntax: activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]
+10.  List all existing activities
+        Syntax: activity /list /sid [SESSION_ID]
+11.  Show the summary of an existing session
+        Syntax: session /summary /sid [SESSION_ID]
+12.  Create a new group
+        Syntax: group /create /n [GROUP_NAME] /pl [NAME1 NAME2...]
+13. Delete an existing group
+        Syntax: group /delete /gid [GROUP_ID]
+14.  Edit an existing group
+         Syntax: group /edit /gid [GROUP_ID] [</n [GROUP_NAME]>] [</pl [NAME1 NAME2...]>]
+15. View an existing group's details
+        Syntax: group /view /gid [GROUP_ID]
+16. List all existing groups
+        Syntax: group /list
+17.  Show this help menu
+        Syntax: help
+18. Exit the program
+        Syntax: exit
+============================================================
+> The session was created successfully.
+Session Id #1 --
+Name: Class outing
+Date: 12-03-2022
+Group: None
+Participants:
+ 1. alice
+ 2. bob
+The list of activities in the session is currently empty.
+============================================================
+> The session was created successfully.
+Session Id #2 --
+Name: Class hangout
+Date: 09-04-2022
+Group: None
+Participants:
+ 1. ivan
+ 2. mike
+ 3. charlie
+The list of activities in the session is currently empty.
+============================================================
+> Session Id #1 --
+Name: Class outing
+Date: 12-03-2022
+Group: None
+Participants:
+ 1. alice
+ 2. bob
+The list of activities in the session is currently empty.
+============================================================
+> The group was created successfully.
+Group Id #1  --
+Name: Friends
+Participants:
+ 1. Alice
+ 2. bob
+ 3. charlie
+============================================================
+> The group was created successfully.
+Group Id #2  --
+Name: Army Friends
+Participants:
+ 1. James
+ 2. Joey
+ 3. Brandon
+============================================================
+> Group Id #1  --
+Name: Friends
+Participants:
+ 1. Alice
+ 2. bob
+ 3. charlie
+============================================================
+> ============================================================
+ $$$$$$\            $$\ $$\   $$\     $$\           $$\
+$$  $$\           $$ |\|  $$ |    $$ |          $$ |
+$$ /  \__| $$$$$$\  $$ |$$\ $$$$$$\   $$ | $$$$$$\  $$$$$$$\
+\$$$$$$\  $$  $$\ $$ |$$ |\_$$  _|  $$ | \____$$\ $$  __$$\
+ \____$$\ $$ /  $$ |$$ |$$ |  $$ |    $$ | $$$$$$$ |$$ |  $$ |
+$$\   $$ |$$ |  $$ |$$ |$$ |  $$ |$$\ $$ |$$  __$$ |$$ |  $$ |
+\$$$$$$  |$$$$$$$  |$$ |$$ |  \$$$$  |$$ |\$$$$$$$ |$$ |  $$ |
+ \______/ $$  ____/ \|\__|   \____/ \__| \_______|\__|  \__|
+          $$ |
+          $$ |
+          \__|
+Goodbye!
+============================================================

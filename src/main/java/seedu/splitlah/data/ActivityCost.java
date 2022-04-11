@@ -31,27 +31,6 @@ public class ActivityCost implements Serializable {
         this.costOwed = costOwed;
     }
 
-    /**
-     * Constructs an ActivityCost object and sets cost to 0 if only activityId is supplied.
-     * Assumption: Every field is non-negative.
-     *
-     * @param activityId int representing the activityId.
-     */
-    public ActivityCost(int activityId) {
-        this(activityId, 0, 0);
-        Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYCOST_CONSTRUCT_WITH_ACTIVITYID);
-    }
-
-    /**
-     * Default constructor, sets activityId to -1 to avoid conflict with other activityIds.
-     */
-    public ActivityCost() {
-        this.activityId = -1;
-        this.costPaid = 0;
-        this.costOwed = 0;
-        Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYCOST_CONSTRUCT_WITH_DEFAULT_PARAMS);
-    }
-
     public int getActivityId() {
         return activityId;
     }
@@ -66,13 +45,5 @@ public class ActivityCost implements Serializable {
 
     public void setActivityId(int activityId) {
         this.activityId = activityId;
-    }
-
-    public void setCostPaid(int costPaid) {
-        this.costPaid = costPaid;
-    }
-
-    public void setCostOwed(int costOwed) {
-        this.costOwed = costOwed;
     }
 }

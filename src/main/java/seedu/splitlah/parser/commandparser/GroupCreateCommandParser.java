@@ -1,9 +1,7 @@
 package seedu.splitlah.parser.commandparser;
 
 import seedu.splitlah.command.GroupCreateCommand;
-import seedu.splitlah.command.InvalidCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
-import seedu.splitlah.parser.Parser;
 import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
@@ -36,8 +34,8 @@ public class GroupCreateCommandParser implements CommandParser<GroupCreateComman
     public GroupCreateCommand getCommand(String commandArgs) throws InvalidFormatException {
         assert commandArgs != null : Message.ASSERT_PARSER_COMMAND_ARGUMENTS_NULL;
         try {
-            String parsedGroupName = Parser.parseName(commandArgs);
-            String[] parsedNameList = Parser.parsePersonList(commandArgs);
+            String parsedGroupName = ParserUtils.parseName(commandArgs);
+            String[] parsedNameList = ParserUtils.parsePersonList(commandArgs);
             return new GroupCreateCommand(parsedGroupName, parsedNameList);
         } catch (InvalidFormatException formatException) {
             String invalidCommandMessage = formatException.getMessage() + "\n" + COMMAND_FORMAT;

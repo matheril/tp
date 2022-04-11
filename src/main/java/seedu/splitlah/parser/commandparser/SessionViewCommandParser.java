@@ -2,7 +2,6 @@ package seedu.splitlah.parser.commandparser;
 
 import seedu.splitlah.command.SessionViewCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
-import seedu.splitlah.parser.Parser;
 import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
@@ -34,7 +33,7 @@ public class SessionViewCommandParser implements CommandParser<SessionViewComman
     public SessionViewCommand getCommand(String commandArgs) throws InvalidFormatException {
         assert commandArgs != null : Message.ASSERT_PARSER_COMMAND_ARGUMENTS_NULL;
         try {
-            int sessionId = Parser.parseSessionId(commandArgs);
+            int sessionId = ParserUtils.parseSessionId(commandArgs);
             return new SessionViewCommand(sessionId);
         } catch (InvalidFormatException exception) {
             String invalidCommandMessage = exception.getMessage() + "\n" + COMMAND_FORMAT;

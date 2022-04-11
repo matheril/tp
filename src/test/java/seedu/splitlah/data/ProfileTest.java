@@ -331,7 +331,7 @@ class ProfileTest {
      * Checks if sessionId is incremented when getNewSessionId method is called.
      */
     @Test
-    public void getNewSessionId_functionCalled_sessionIdIncrementedByOne() {
+    public void getNewSessionId_methodCalled_sessionIdIncrementedByOne() {
         int sessionIdToTest = manager.getProfile().getSessionIdTracker();
         manager.getProfile().getNewSessionId();
         assertEquals(sessionIdToTest + 1, manager.getProfile().getSessionIdTracker());
@@ -341,7 +341,7 @@ class ProfileTest {
      * Checks if activityId is incremented when getNewActivityId method is called.
      */
     @Test
-    public void getNewActivityId_functionCalled_activityIdIncrementedByOne() {
+    public void getNewActivityId_methodCalled_activityIdIncrementedByOne() {
         int activityIdToTest = manager.getProfile().getActivityIdTracker();
         manager.getProfile().getNewActivityId();
         assertEquals(activityIdToTest + 1, manager.getProfile().getActivityIdTracker());
@@ -351,7 +351,7 @@ class ProfileTest {
      * Checks if groupId is incremented when getNewGroupId method is called.
      */
     @Test
-    public void getNewGroupId_functionCalled_groupIdIncrementedByOne() {
+    public void getNewGroupId_methodCalled_groupIdIncrementedByOne() {
         int groupIdToTest = manager.getProfile().getGroupIdTracker();
         manager.getProfile().getNewGroupId();
         assertEquals(groupIdToTest + 1, manager.getProfile().getGroupIdTracker());

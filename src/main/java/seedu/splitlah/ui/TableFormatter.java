@@ -49,21 +49,6 @@ public class TableFormatter {
     }
 
     /**
-     * Deletes a row from the table by index. Rows start from 0.
-     *
-     * @param row An integer representing the row number.
-     * @return true if the row was successfully deleted.
-     *         false if the row index was invalid. No row will be deleted.
-     */
-    public boolean deleteRow(int row) {
-        if (row >= rows.size()) {
-            return false;
-        }
-        rows.remove(row);
-        return true;
-    }
-
-    /**
      * Calculates maximum width of the specified column. The first column is column 0.
      *
      * @param column An integer representing the column number.

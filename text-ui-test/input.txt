@@ -1,7 +1,16 @@
-session
-session /create
-session /create /n Class outing 1 /d 12-03-2022 /pl alice bob
-session /create /n Class outing 1 /d 12-03-2022 /pl alice bob
-session /create /n Class outing 2 /d 12-03-2022 /pl alice bob
-session /create /n Class outing 3 /d 12-03-2022 /pl alice alice
+help
+session /create /n Class outing /d 12-03-2022 /pl alice bob
+session /create /n Class hangout /d 09-04-2022 /pl ivan mike charlie
+session /view /sid 1
+group /create /n Friends /pl Alice bob charlie
+group /create /n Army Friends /pl James Joey Brandon
+group /view /gid 1
+activity /create /sid 1 /n Lunch /p Alice /i Alice Bob /co 20
+activity /create /sid 2 /n Order In /p Ivan /i ivan Mike Charlie /cl 10 20 30
+activity /create /sid 2 /n Online Order /p Charlie /i Ivan /co 50
+session /summary /sid 1
+session /summary /sid 2
+activity /create /sid 2 /n Coffee /p Mike /i charlie ivan mike /cl 9 8 7
+activity /list /sid 2
+session /summary /sid 2
 exit

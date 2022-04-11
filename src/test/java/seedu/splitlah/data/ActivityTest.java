@@ -23,22 +23,24 @@ class ActivityTest {
     private static final String CREATE_TEST_SESSION_INPUT =
             "session /create /n Class outing /d 15-02-2022 /pl Alice Bob Charlie";
     private static final String CREATE_TEST_ACTIVITY_INPUT_ONE =
-            "activity /create /sid 1 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
+            "activity /create /sid 1 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc 10";
     private static final String CREATE_TEST_ACTIVITY_INPUT_TWO =
             "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /co 30";
     private static final String ACTIVITY_ONE_STRING =
             "Activity Id #1 --\n"
-                    + "Name:  Lunch\n"
-                    + "Id:    1\n"
-                    + "Payer: Alice\n"
-                    + "Cost:  $15.00\n"
+                    + "Name:                     Lunch\n"
+                    + "Id:                       1\n"
+                    + "Payer:                    Alice\n"
+                    + "GST:                      7.00%\n"
+                    + "Service Charge(SC):       10.00%\n"
+                    + "Cost(GST & SC inclusive): $17.66\n"
                     + "Involved: \n"
                     + "-------------------------\n"
                     + "# | Name    | Cost Owed \n"
                     + "-------------------------\n"
-                    + "1 | Alice   | 5.00      \n"
-                    + "2 | Bob     | 5.00      \n"
-                    + "3 | Charlie | 5.00      \n"
+                    + "1 | Alice   | $5.89     \n"
+                    + "2 | Bob     | $5.89     \n"
+                    + "3 | Charlie | $5.89     \n"
                     + "=========================";
 
     /**
@@ -60,6 +62,65 @@ class ActivityTest {
         } catch (InvalidDataException exception) {
             fail();
         }
+    }
+
+    /**
+     * Checks if the correct activity unique identifier is returned.
+     */
+    @Test
+    void getActivityId_activityOne_correctActivityId() {
+        assertEquals(1, activityOne.getActivityId());
+    }
+
+    /**
+     * Checks if the correct activity name is returned.
+     */
+    @Test
+    void getActivityName_activityOne_correctActivityName() {
+        assertEquals("Lunch", activityOne.getActivityName());
+    }
+
+    /**
+     * Checks if the correct activity total cost is returned.
+     */
+    @Test
+    void getTotalCost_activityOne_correctActivityTotalCost() {
+        assertTrue(Math.abs(17.65 - activityOne.getTotalCost()) < 0.01);
+    }
+
+    /**
+     * Checks if the correct person who paid for the activity is returned.
+     */
+    @Test
+    void getPersonPaid_activityOne_correctPersonPaid() throws InvalidDataException {
+        Person actualPersonPaid = session.getPersonByName("Alice");
+        assertEquals(actualPersonPaid, activityOne.getPersonPaid());
+    }
+
+    /**
+     * Checks if the correct activity gst is returned.
+     */
+    @Test
+    void getGst_activityOne_correctGst() {
+        assertEquals(7, activityOne.getGst());
+    }
+
+    /**
+     * Checks if the correct activity service charge is returned.
+     */
+    @Test
+    void getServiceCharge_activityOne_correctServiceCharge() {
+        assertEquals(10, activityOne.getServiceCharge());
+    }
+
+    /**
+     * Checks if the correct array list of persons involved in the activity is returned.
+     */
+    @Test
+    void getInvolvedPersonList_activityOne_correctInvolvedPersonList() {
+        String[] personNames = { "Alice", "Bob","Charlie" };
+        PersonList personList = new PersonList(personNames);
+        assertEquals(personList.getPersonList(), activityOne.getInvolvedPersonList());
     }
 
     /**

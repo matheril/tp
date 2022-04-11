@@ -90,29 +90,14 @@ public class Manager {
         }
     }
 
-    /**
-     * Returns a TextUI object for user inputs and outputs.
-     *
-     * @return A TextUI object.
-     */
     public TextUI getUi() {
         return ui;
     }
 
-    /**
-     * Returns a Profile object that stores user created sessions and groups.
-     *
-     * @return A Profile object.
-     */
     public Profile getProfile() {
         return profile;
     }
 
-    /**
-     * Returns a Logger object to records logs.
-     *
-     * @return A Logger object.
-     */
     public static Logger getLogger() {
         return logger;
     }

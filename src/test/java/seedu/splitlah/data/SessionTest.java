@@ -26,7 +26,6 @@ class SessionTest {
     private static final int TEST_SESSION_THREE = 3;
     private static final int TEST_ACTIVITY_ONE = 1;
     private static final int TEST_ACTIVITY_TWO = 2;
-    private static final int TEST_ACTIVITY_THREE = 3;
     private static final String CREATE_TEST_SESSION_INPUT_ONE =
             "session /create /n Class outing /d 15-02-2022 /pl Alice Bob Charlie";
     private static final String CREATE_TEST_SESSION_INPUT_TWO =

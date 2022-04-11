@@ -37,11 +37,6 @@ public class TextUI {
         printDivider();
     }
 
-    public void printlnMessageWithDashDivider(String message) {
-        out.println(message);
-        printDashDivider();
-    }
-
     public String readNextLine() {
         printMessage(Message.PROMPT_TEXTUI_AWAITING_INPUT);
         return in.nextLine();
@@ -58,10 +53,6 @@ public class TextUI {
         out.println("============================================================");
     }
 
-    public void printDashDivider() {
-        out.println("------------------------------------------------------------");
-    }
-    
     public void printHelpMenu() {
         printlnMessageWithDivider(Message.MESSAGE_TEXTUI_HELP_MENU);
     }

@@ -2,7 +2,6 @@ package seedu.splitlah.parser.commandparser;
 
 import seedu.splitlah.command.GroupEditCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
-import seedu.splitlah.parser.Parser;
 import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
@@ -14,7 +13,7 @@ public class GroupEditCommandParser implements CommandParser<GroupEditCommand> {
     public static final String COMMAND_TEXT = "group /edit";
 
     public static final String COMMAND_FORMAT =
-        "Syntax: group /edit /gid [GROUP_ID] [</n [GROUP_NAME]>] [</pl [NAME1 NAME2...]>]";
+        "Syntax: group /edit /gid [GROUP_ID] {/n [GROUP_NAME] /pl [NAME1 NAME2...]}";
 
     public static final String[] COMMAND_DELIMITERS = {
         ParserUtils.GROUP_ID_DELIMITER,
@@ -35,7 +34,7 @@ public class GroupEditCommandParser implements CommandParser<GroupEditCommand> {
     public GroupEditCommand getCommand(String commandArgs) throws InvalidFormatException {
         int parsedGroupId;
         try {
-            parsedGroupId = Parser.parseGroupId(commandArgs);
+            parsedGroupId = ParserUtils.parseGroupId(commandArgs);
         } catch (InvalidFormatException formatException) {
             String invalidCommandMessage = formatException.getMessage() + "\n" + COMMAND_FORMAT;
             throw new InvalidFormatException(invalidCommandMessage);
@@ -43,7 +42,7 @@ public class GroupEditCommandParser implements CommandParser<GroupEditCommand> {
         boolean hasGroupNameDelimiter = false;
         String parsedGroupName = null;
         try {
-            parsedGroupName = Parser.parseName(commandArgs);
+            parsedGroupName = ParserUtils.parseName(commandArgs);
             hasGroupNameDelimiter = true;
         } catch (InvalidFormatException formatException) {
             if (!formatException.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
@@ -56,7 +55,7 @@ public class GroupEditCommandParser implements CommandParser<GroupEditCommand> {
         boolean hasPersonListDelimiter = false;
         String[] parsedNames = null;
         try {
-            parsedNames = Parser.parsePersonList(commandArgs);
+            parsedNames = ParserUtils.parsePersonList(commandArgs);
             hasPersonListDelimiter = true;
         } catch (InvalidFormatException formatException) {
             if (!formatException.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND

@@ -16,6 +16,12 @@ public class PersonCostPair implements Comparable<PersonCostPair> {
     private double cost;
     private boolean isProcessed;
 
+    public PersonCostPair(Person person) {
+        this.person = person;
+        this.cost = person.getTotalCost();
+        this.isProcessed = false;
+    }
+
     public Person getPerson() {
         return person;
     }
@@ -48,21 +54,5 @@ public class PersonCostPair implements Comparable<PersonCostPair> {
     @Override
     public int compareTo(PersonCostPair personCostPair) {
         return Double.compare(cost, personCostPair.getCost());
-    }
-
-    /**
-     * A Comparator that would sort two PersonCostPair objects in ascending order of their costs. 
-     */
-    public static Comparator<PersonCostPair> PersonCostPairComparator = new Comparator<PersonCostPair>() {
-        @Override
-        public int compare(PersonCostPair personCostPair1, PersonCostPair personCostPair2) {
-            return personCostPair1.compareTo(personCostPair2);
-        }
-    };
-
-    public PersonCostPair(Person person) {
-        this.person = person;
-        this.cost = person.getTotalCost();
-        this.isProcessed = false;
     }
 }

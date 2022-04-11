@@ -5,8 +5,10 @@ import org.junit.jupiter.api.Test;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.parser.Parser;
+import seedu.splitlah.ui.Message;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class ActivityDeleteCommandTest {
 
@@ -84,6 +86,14 @@ class ActivityDeleteCommandTest {
         //Checks that the number of activities stored decrease by 1
         command.run(manager);
         assertEquals(1, manager.getProfile().getSession(1).getActivityList().size());
+
+        //Checks that the activity with the specified id still exists
+        try {
+            manager.getProfile().getSession(1).getActivity(1);
+            fail();
+        } catch (InvalidDataException e) {
+            assertEquals(Message.ERROR_SESSION_ACTIVITY_ID_NOT_IN_LIST, e.getMessage());
+        }
     }
 
 }

@@ -4,7 +4,6 @@ import seedu.splitlah.data.Activity;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
-import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 import seedu.splitlah.ui.TextUI;
 
@@ -17,15 +16,6 @@ import java.util.logging.Level;
  * @author Tianle
  */
 public class ActivityViewCommand extends Command {
-
-    public static final String COMMAND_TEXT = "activity /view";
-
-    public static final String COMMAND_FORMAT = "Syntax: activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]";
-
-    public static final String[] COMMAND_DELIMITERS = { 
-        ParserUtils.SESSION_ID_DELIMITER,
-        ParserUtils.ACTIVITY_ID_DELIMITER
-    };
 
     private final int sessionId;
     private final int activityId;

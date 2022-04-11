@@ -88,22 +88,6 @@ public class Person implements Serializable {
         }
     }
 
-    public double getTotalCostPaid() {
-        double totalCostPaid = 0;
-        for (ActivityCost i : activityCostList) {
-            totalCostPaid += i.getCostPaid();
-        }
-        return totalCostPaid;
-    }
-
-    public double getTotalCostOwed() {
-        double totalCostOwed = 0;
-        for (ActivityCost i : activityCostList) {
-            totalCostOwed += i.getCostOwed();
-        }
-        return totalCostOwed;
-    }
-
     /**
      * Calculates the amount of money other Persons owe to this Person.
      * In other words, how much money this Person must receive in order to break even.

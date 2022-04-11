@@ -2,7 +2,6 @@ package seedu.splitlah.parser.commandparser;
 
 import seedu.splitlah.command.SessionDeleteCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
-import seedu.splitlah.parser.Parser;
 import seedu.splitlah.parser.ParserUtils;
 
 /**
@@ -32,7 +31,7 @@ public class SessionDeleteCommandParser implements CommandParser<SessionDeleteCo
     @Override
     public SessionDeleteCommand getCommand(String commandArgs) throws InvalidFormatException {
         try {
-            int sessionId = Parser.parseSessionId(commandArgs);
+            int sessionId = ParserUtils.parseSessionId(commandArgs);
             return new SessionDeleteCommand(sessionId);
         } catch (InvalidFormatException formatException) {
             String invalidCommandMessage = formatException.getMessage() + "\n" + COMMAND_FORMAT;

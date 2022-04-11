@@ -1,5 +1,6 @@
 package seedu.splitlah.parser.commandparser;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.splitlah.command.ActivityCreateCommand;
 import seedu.splitlah.command.Command;
@@ -15,6 +16,18 @@ import static org.junit.jupiter.api.Assertions.fail;
 class ActivityCreateCommandParserTest {
 
     private static final String COMMAND_TYPE = ActivityCreateCommandParser.COMMAND_TEXT;
+
+    Manager manager = new Manager();
+
+    /**
+     * Creates a session that is stored and managed by the Manager object.
+     */
+    @BeforeEach
+    public void setUp() {
+        String sessionInput = "session /create /n Class outing /d 15-02-2022 /pl Alice Bob Charlie";
+        Command createSession = Parser.getCommand(sessionInput);
+        createSession.run(manager);
+    }
 
     /**
      * Checks if an InvalidFormatException with the correct message is thrown
@@ -366,12 +379,6 @@ class ActivityCreateCommandParserTest {
      */
     @Test
     public void getCommand_validUserInput_ActivityCreateCommand() {
-        Manager manager = new Manager();
-
-        String sessionInput = "session /create /n Class outing /d 15-02-2022 /pl Alice Bob Charlie";
-        Command createSession = Parser.getCommand(sessionInput);
-        createSession.run(manager);
-
         String validUserInput = "activity /create /sid 1 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
         String validArguments = Parser.getRemainingArgument(validUserInput);
         String errorMessage = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, validArguments);

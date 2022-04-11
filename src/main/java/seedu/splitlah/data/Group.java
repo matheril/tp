@@ -36,57 +36,26 @@ public class Group implements Serializable {
         this.personList = personList;
     }
 
-    /**
-     * Returns the group's name.
-     *
-     * @return A String object containing the name of the group.
-     */
     public String getGroupName() {
         return groupName;
     }
 
-    /**
-     * Updates the name of this Group object to the specified name.
-     *
-     * @param groupName A String object representing the updated name of the group.
-     */
     public void setGroupName(String groupName) {
         this.groupName = groupName;
     }
 
-    /**
-     * Returns the group's unique identifier.
-     *
-     * @return An integer representing the group's identifier.
-     */
     public int getGroupId() {
         return groupId;
     }
 
-    /**
-     * Returns an ArrayList object containing Person objects representing the participants in the group.
-     *
-     * @return An ArrayList object containing Person objects in the group.
-     */
     public ArrayList<Person> getPersonList() {
         return personList.getPersonList();
     }
 
-    /**
-     * Updates the PersonList of this Group object to the specified personList.
-     *
-     * @param personList A PersonList object representing the updated PersonList of the group.
-     */
     public void setPersonList(PersonList personList) {
         this.personList = personList;
     }
 
-    /**
-     * Checks whether the Group object has at least one participant.
-     *
-     * @return true if the Group object has at least one participant,
-     *         false otherwise.
-     */
     public boolean isGroupEmpty() {
         return personList.isEmpty();
     }
@@ -112,7 +81,7 @@ public class Group implements Serializable {
     }
 
     /**
-     * Returns a Person object represented by the name.
+     * Returns a Person object searched by the person's name.
      *
      * @param personName A String object that represents the person's name.
      * @return A Person object represented by its name.
@@ -130,11 +99,6 @@ public class Group implements Serializable {
         throw new InvalidDataException(Message.ERROR_GROUP_PERSON_NOT_IN_LIST);
     }
 
-    /**
-     * Returns the number of participants in the group.
-     *
-     * @return An integer object that represents that total number of participants in the group.
-     */
     public int getPersonCount() {
         return personList.getSize();
     }
@@ -150,9 +114,10 @@ public class Group implements Serializable {
     }
 
     /**
-     * Returns a String object describing the Group object.
+     * Returns a String object which provides the details of the group, including the name of the group,
+     * the group's unique identifier, and the persons involved in the activity.
      *
-     * @return A String object containing a description of the Group object.
+     * @return A String object representing the details of the group.
      */
     @Override
     public String toString() {

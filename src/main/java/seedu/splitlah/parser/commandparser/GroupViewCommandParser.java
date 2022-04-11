@@ -2,7 +2,6 @@ package seedu.splitlah.parser.commandparser;
 
 import seedu.splitlah.command.GroupViewCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
-import seedu.splitlah.parser.Parser;
 import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
@@ -32,7 +31,7 @@ public class GroupViewCommandParser implements CommandParser<GroupViewCommand> {
     @Override
     public GroupViewCommand getCommand(String commandArgs) throws InvalidFormatException {
         try {
-            int groupId = Parser.parseGroupId(commandArgs);
+            int groupId = ParserUtils.parseGroupId(commandArgs);
             assert groupId > 0 : Message.ASSERT_GROUPVIEWPARSER_GROUP_ID_NOT_INITIALIZED;
             return new GroupViewCommand(groupId);
         } catch (InvalidFormatException e) {

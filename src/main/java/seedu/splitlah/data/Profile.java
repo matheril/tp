@@ -115,11 +115,6 @@ public class Profile implements Serializable {
         sessionList.remove(sessionToBeRemoved);
     }
 
-    /**
-     * Returns the list of session stored in profile.
-     *
-     * @return An ArrayList of Session objects.
-     */
     public ArrayList<Session> getSessionList() {
         return sessionList;
     }
@@ -238,11 +233,6 @@ public class Profile implements Serializable {
         groupList.remove(groupToBeRemoved);
     }
 
-    /**
-     * Returns the list of groups stored in profile.
-     *
-     * @return An Arraylist of Group objects.
-     */
     public ArrayList<Group> getGroupList() {
         return groupList;
     }
@@ -283,11 +273,6 @@ public class Profile implements Serializable {
         return newSessionId;
     }
 
-    /**
-     * Returns the value of the current session unique identifier that is tracked.
-     *
-     * @return An integer that represents the current session unique identifier.
-     */
     public int getSessionIdTracker() {
         return sessionIdTracker;
     }
@@ -304,11 +289,6 @@ public class Profile implements Serializable {
         return newActivityId;
     }
 
-    /**
-     * Returns the value of the current activity unique identifier that is tracked.
-     *
-     * @return An integer that represents the current activity unique identifier.
-     */
     public int getActivityIdTracker() {
         return activityIdTracker;
     }
@@ -325,11 +305,6 @@ public class Profile implements Serializable {
         return newGroupId;
     }
 
-    /**
-     * Returns the value of the current group unique identifier that is tracked.
-     *
-     * @return An integer that represents the current group unique identifier.
-     */
     public int getGroupIdTracker() {
         return groupIdTracker;
     }

@@ -4,9 +4,6 @@ import seedu.splitlah.data.Group;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.PersonList;
 import seedu.splitlah.data.Profile;
-import seedu.splitlah.exceptions.InvalidFormatException;
-import seedu.splitlah.parser.Parser;
-import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 import seedu.splitlah.ui.TextUI;
 
@@ -19,18 +16,8 @@ import java.util.logging.Level;
  */
 public class GroupCreateCommand extends Command {
 
-    public static final String COMMAND_TEXT = "group /create";
-
-    public static final String COMMAND_FORMAT =
-        "Syntax: group /create /n [GROUP_NAME] /pl [NAME1 NAME2...]";
-
     private static final String SUCCESS_MESSAGE =
         "The group was created successfully.\n";
-
-    public static final String[] COMMAND_DELIMITERS = {
-        ParserUtils.NAME_DELIMITER,
-        ParserUtils.PERSON_LIST_DELIMITER
-    };
 
     private final String groupName;
     private final String[] personNames;
@@ -74,7 +61,14 @@ public class GroupCreateCommand extends Command {
             Manager.getLogger().log(Level.FINEST,Message.LOGGER_GROUPCREATE_DUPLICATE_NAMES_IN_GROUP_LIST);
             return;
         }
+
         PersonList personList = new PersonList(personNames);
+        if (personNames.length != personList.getSize()) {
+            ui.printlnMessage(Message.ERROR_PERSONLIST_CONTAINS_INVALID_NAME);
+            Manager.getLogger().log(Level.FINEST,Message.LOGGER_PERSONLIST_INVALID_NAME_EXISTS_IN_CREATEGROUP);
+            return;
+        }
+
         int newGroupId = profile.getNewGroupId();
         Group newGroup = new Group(groupName, newGroupId, personList);
         profile.addGroup(newGroup);

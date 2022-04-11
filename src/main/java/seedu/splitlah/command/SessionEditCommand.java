@@ -26,6 +26,7 @@ public class SessionEditCommand extends Command {
     private final String sessionName;
     private final String[] personNames;
     private final LocalDate sessionDate;
+    private LocalDate oldSessionDate;
 
     /**
      * Initializes a SessionEditCommand object.
@@ -44,6 +45,68 @@ public class SessionEditCommand extends Command {
     }
 
     /**
+     * Returns the new list of persons if all checks are passed.
+     *
+     * @param oldPersonList A PersonList object that represents the PersonList of the session to be edited.
+     * @return A PersonList object represents the new PersonList for a session.
+     * @throws InvalidDataException If there were duplicates in the new personNames,
+     *                              if there were invalid names in the new personNames,
+     *                              if there were missing existing names in the new personList.
+     */
+    private PersonList getNewPersonList(PersonList oldPersonList) throws InvalidDataException {
+        boolean hasDuplicates = PersonList.hasNameDuplicates(personNames);
+        if (hasDuplicates) {
+            throw new InvalidDataException(Message.ERROR_PERSONLIST_DUPLICATE_NAME_IN_SESSION);
+        }
+        PersonList newPersonList = new PersonList(personNames);
+        if (personNames.length != newPersonList.getSize()) {
+            throw new InvalidDataException(Message.ERROR_PERSONLIST_CONTAINS_INVALID_NAME);
+        }
+        if (!newPersonList.isSuperset(oldPersonList.getPersonList())) {
+            throw new InvalidDataException(Message.ERROR_SESSIONEDIT_INVALID_PERSONLIST);
+        }
+        return newPersonList;
+    }
+
+    /**
+     * Returns the new session name if all checks are passed.
+     *
+     * @param oldSessionName A String that represents the name of the session to be edited.
+     * @param profile        A Profile object that contains the list of session.
+     * @return A String that represents the new session name.
+     * @throws InvalidDataException If the new session name exists within the list of session other than itself.
+     */
+    private String getNewSessionName(String oldSessionName, Profile profile) throws InvalidDataException {
+        boolean isSessionExists = profile.hasSessionName(sessionName);
+        boolean hasSameSessionName = oldSessionName.equalsIgnoreCase(sessionName);
+        if (!hasSameSessionName && isSessionExists) {
+            throw new InvalidDataException(Message.ERROR_PROFILE_DUPLICATE_SESSION);
+        }
+        return sessionName;
+    }
+
+    /**
+     * Checks if there were edits to the existing session.
+     *
+     * @param session A Session object that represents the session to be edited.
+     * @return true if any of the editable fields were edited,
+     *         false otherwise.
+     */
+    private boolean hasSessionEdited(Session session) {
+        if (sessionName != null && !sessionName.equalsIgnoreCase(session.getSessionName())) {
+            return true;
+        }
+        if (sessionDate != null && !sessionDate.equals(oldSessionDate)) {
+            return true;
+        }
+        if (personNames != null) {
+            PersonList newPersonList = new PersonList(personNames);
+            return !newPersonList.isSamePersonList(session.getPersonArrayList());
+        }
+        return false;
+    }
+
+    /**
      * Runs the command to edit an existing Session object from the list of sessions managed by a Manager Object.
      *
      * @param manager A Manager object that manages the TextUI, Profile and Storage object.
@@ -53,71 +116,39 @@ public class SessionEditCommand extends Command {
         TextUI ui = manager.getUi();
         Profile profile = manager.getProfile();
         Session session;
+        PersonList newPersonList = null;
+        String newSessionName = null;
         try {
             session = profile.getSession(sessionId);
+            if (personNames != null) {
+                newPersonList = getNewPersonList(session.getPersonList());
+            }
+            if (sessionName != null) {
+                newSessionName = getNewSessionName(session.getSessionName(), profile);
+            }
+            if (sessionDate != null) {
+                oldSessionDate = session.getDateCreated();
+                session.setDateCreated(sessionDate);
+            }
         } catch (InvalidDataException invalidDataException) {
-            ui.printlnMessageWithDivider(invalidDataException.getMessage());
-            Manager.getLogger().log(Level.FINEST, Message.LOGGER_PROFILE_SESSION_NOT_IN_LIST);
+            ui.printlnMessage(invalidDataException.getMessage());
             return;
         }
-        assert session != null : Message.ASSERT_SESSIONEDIT_SESSION_IS_NULL;
-        PersonList newPersonList = null;
-        boolean isPersonNamesEdited = false;
-        if (personNames != null) {
-            boolean hasDuplicates = PersonList.hasNameDuplicates(personNames);
-            if (hasDuplicates) {
-                ui.printlnMessage(Message.ERROR_PERSONLIST_DUPLICATE_NAME_IN_SESSION);
-                Manager.getLogger().log(Level.FINEST, Message.LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_EDITSESSION);
-                return;
-            }
-            newPersonList = new PersonList(personNames);
-            if (personNames.length != newPersonList.getSize()) {
-                ui.printlnMessage(Message.ERROR_PERSONLIST_CONTAINS_INVALID_NAME);
-                Manager.getLogger().log(Level.FINEST,Message.LOGGER_PERSONLIST_INVALID_NAME_EXISTS_IN_EDITSESSION);
-                return;
-            }
-            if (!newPersonList.isSuperset(session.getPersonArrayList())) {
-                ui.printlnMessageWithDivider(Message.ERROR_SESSIONEDIT_INVALID_PERSONLIST);
-                return;
-            }
-            if (!session.getPersonList().isSuperset(newPersonList.getPersonList())) {
-                isPersonNamesEdited = true;
-            }
-        }
-        boolean isSessionNameEdited = false;
-        if (sessionName != null) {
-            boolean isSessionExists = profile.hasSessionName(sessionName);
-            boolean hasSameSessionName = sessionName.equalsIgnoreCase(session.getSessionName());
-            if (!hasSameSessionName && isSessionExists) {
-                ui.printlnMessage(Message.ERROR_PROFILE_DUPLICATE_SESSION);
-                Manager.getLogger().log(Level.FINEST,Message.LOGGER_SESSIONEDIT_DUPLICATE_NAMES_IN_SESSION_LIST);
-                return;
-            }
-            if (!hasSameSessionName) {
-                isSessionNameEdited = true;
-            }
-        }
-        boolean isSessionDateEdited = false;
-        if (sessionDate != null) {
-            if (!session.getDateCreated().equals(sessionDate)) {
-                session.setDateCreated(sessionDate);
-                isSessionDateEdited = true;
-            }
-        }
-        if (isPersonNamesEdited) {
+        boolean isSessionEdited = hasSessionEdited(session);
+        if (newPersonList != null) {
             for (Person person : newPersonList.getPersonList()) {
                 session.addPerson(person);
             }
         }
-        if (isSessionNameEdited) {
-            session.setSessionName(sessionName);
+        if (newSessionName != null) {
+            session.setSessionName(newSessionName);
         }
-        manager.saveProfile();
-        if (isPersonNamesEdited || isSessionNameEdited || isSessionDateEdited) {
+        if (isSessionEdited) {
             ui.printlnMessageWithDivider(COMMAND_SUCCESS + "\n" + session);
         } else {
-            ui.printlnMessageWithDivider(COMMAND_NO_EDITS_MADE);
+            ui.printlnMessage(COMMAND_NO_EDITS_MADE);
         }
+        manager.saveProfile();
         Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONEDIT_SESSION_EDITED);
     }
 }

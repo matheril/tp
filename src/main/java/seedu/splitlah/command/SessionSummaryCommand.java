@@ -66,8 +66,8 @@ public class SessionSummaryCommand extends Command {
     }
 
     /**
-     * Returns an ArrayList object of PersonCostPair objects which represent the total cost borne by each
-     * Person object in the ArrayList object of Person object provided in the parameter.
+     * Groups each person with the cost borne by them and consolidates them into an ArrayList object of
+     * PersonCostPair objects.
      * 
      * @param personList An ArrayList object of Person objects representing a list of participants in a Session object.
      * @return An ArrayList object of PersonCostPair objects each corresponding to a Person object in the

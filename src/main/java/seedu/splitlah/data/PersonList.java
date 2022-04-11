@@ -88,16 +88,6 @@ public class PersonList implements Serializable {
     }
 
     /**
-     * Removes a Person object from the ArrayList object of Person objects if it exist,
-     * otherwise Person object is not removed.
-     *
-     * @param person A Person object to be removed.
-     */
-    public void removePerson(Person person) {
-        personList.remove(person);
-    }
-
-    /**
      * Returns the ArrayList object of Person objects.
      *
      * @return An ArrayList object of Person objects.
@@ -139,7 +129,7 @@ public class PersonList implements Serializable {
 
     /**
      * Checks if the personList attribute is a superset of the ArrayList object of Person objects supplied.
-     * Assumption: Function is only called by SessionEditCommand class to verify if new list of Person objects
+     * Assumption: Method is only called by SessionEditCommand class to verify if new list of Person objects
      *             is superset of the ArrayList object supplied.
      *
      * @param oldList An ArrayList object of Person objects.
@@ -155,4 +145,24 @@ public class PersonList implements Serializable {
         }
         return existCount == oldList.size();
     }
+
+    /**
+     * Checks if new person list is exactly the same as old person list.
+     * Assumption: Function is only called by GroupEditCommand class to verify if new list of Person objects
+     *             is the same as the ArrayList object supplied.
+     *
+     * @param oldList An ArrayList object of Person objects.
+     */
+    public boolean isSamePersonList(ArrayList<Person> oldList) {
+        if (this.getSize() != oldList.size()) {
+            return false;
+        }
+        for (Person person : this.getPersonList()) {
+            if (!oldList.contains(person)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

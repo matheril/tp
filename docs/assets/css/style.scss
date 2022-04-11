@@ -1,0 +1,25 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+.main-content blockquote{
+    border-left: 0.4rem solid #dce6f0;
+}
+
+.main-content code {
+    font-weight: bold;
+}
+
+div.button-box {
+    text-align: center;
+    width: 100%;
+}
+
+a.back-button {
+    background-color: #155a95;
+    color: white;
+    padding: 5px 20px 5px 20px;
+    border-radius: 20px;
+    text-align: center;
+}

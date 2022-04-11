@@ -53,48 +53,22 @@ public class Session implements Serializable, Comparable<Session> {
         this.group = group;
     }
     
-    /**
-     * Returns the session's name.
-     *
-     * @return A String object containing the name of the session.
-     */
     public String getSessionName() {
         return sessionName;
     }
 
-    /**
-     * Returns the session's unique identifier.
-     * Assumption: The identifier number is unique across all session identifiers in the profile.
-     *
-     * @return An integer representing the session's identifier.
-     */
     public int getSessionId() {
         return sessionId;
     }
 
-    /**
-     * Returns the date of which the session is created.
-     *
-     * @return A LocalDate object containing the date of creation of the session.
-     */
     public LocalDate getDateCreated() {
         return dateCreated;
     }
 
-    /**
-     * Returns a list of Activity objects representing the activities that occurred in that session.
-     *
-     * @return An ArrayList object containing Activity objects that are part of the session.
-     */
     public ArrayList<Activity> getActivityList() {
         return activityList;
     }
 
-    /**
-     * Returns a list of Person objects representing the participants in the session.
-     *
-     * @return An ArrayList object containing Person objects that are part of the session.
-     */
     public ArrayList<Person> getPersonArrayList() {
         return personList.getPersonList();
     }
@@ -103,38 +77,18 @@ public class Session implements Serializable, Comparable<Session> {
         return personList;
     }
 
-    /**
-     * Returns a Group object representing a group of persons participating in the session.
-     * 
-     * @return A Group object containing Person objects that are participating in the session.
-     */
     public Group getGroup() {
         return group;
     }
 
-    /**
-     * Updates the group of this Session object to the specified group.
-     *
-     * @param group A Group object representing the updated group of the session.
-     */
     public void setGroup(Group group) {
         this.group = group;
     }
 
-    /**
-     * Updates the date of this Session object to the specified date.
-     * 
-     * @param dateCreated A LocalDate object representing the updated date of the session.
-     */
     public void setDateCreated(LocalDate dateCreated) {
         this.dateCreated = dateCreated;
     }
 
-    /**
-     * Updates the name of this Session object to the specified name.
-     * 
-     * @param sessionName A String object representing the updated name of the session.
-     */
     public void setSessionName(String sessionName) {
         this.sessionName = sessionName;
     }
@@ -181,9 +135,34 @@ public class Session implements Serializable, Comparable<Session> {
     }
 
     /**
+     * Removes all ActivityCost objects from all Person objects involved in and paying for the activity.
+     * 
+     * @param activity An Activity object in which all involved Person objects should have their ActivityCost objects
+     *                 with the same activity unique identifier removed.
+     * @throws InvalidDataException If any Person object involved in the Activity object does not have any ActivityCost
+     *                              objects with the same activity unique identifier.
+     */
+    private void removeActivityCosts(Activity activity) throws InvalidDataException {
+        int activityId = activity.getActivityId();
+        ArrayList<Person> involvedPersonList = activity.getInvolvedPersonList();
+        Person payer = activity.getPersonPaid();
+        if (involvedPersonList != null) {
+            boolean isPayerInParticipantList = involvedPersonList.contains(payer);
+            for (Person person : involvedPersonList) {
+                Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSION_ACTIVITYCOST_REMOVAL + person.getName());
+                person.removeActivityCost(activityId);
+            }
+            if (!isPayerInParticipantList) {
+                Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSION_ACTIVITYCOST_REMOVAL + payer.getName());
+                payer.removeActivityCost(activityId);
+            }
+        }
+    }
+
+    /**
      * Removes an Activity object specified by a numerical identifier that uniquely identifies the activity
      * from the Session. Additionally, removes all ActivityCost objects with the same activityId from all Person
-     * objects involved in the activity.
+     * objects involved in and paying for the activity.
      *
      * @param activityId An integer that uniquely identifies an activity.
      * @throws InvalidDataException If activityList is empty or
@@ -207,27 +186,10 @@ public class Session implements Serializable, Comparable<Session> {
             throw new InvalidDataException(Message.ERROR_SESSION_ACTIVITY_ID_NOT_IN_LIST);
         }
 
-        ArrayList<Person> involvedPersonList = deleteTarget.getInvolvedPersonList();
-        Person payer = deleteTarget.getPersonPaid();
-        if (involvedPersonList != null) {
-            boolean isPayerInParticipantList = involvedPersonList.contains(payer);
-            for (Person person : involvedPersonList) {
-                Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSION_ACTIVITYCOST_REMOVAL + person.getName());
-                person.removeActivityCost(activityId);
-            }
-            if (!isPayerInParticipantList) {
-                Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSION_ACTIVITYCOST_REMOVAL + payer.getName());
-                payer.removeActivityCost(activityId);
-            }
-        }
+        removeActivityCosts(deleteTarget);
         activityList.remove(deleteTarget);
     }
 
-    /**
-     * Adds an Activity object to the session, then sorts the activity list by ascending activity unique identifier.
-     *
-     * @param activity An Activity object representing an activity that happened in the session.
-     */
     public void addActivity(Activity activity) {
         assert activity != null : Message.ASSERT_SESSION_ACTIVITY_NULL;
         activityList.add(activity);
@@ -235,7 +197,7 @@ public class Session implements Serializable, Comparable<Session> {
     }
 
     /**
-     * Returns a Person object with a name that matches the queried name.
+     * Returns a Person object with a name that matches the queried name, ignoring case.
      *
      * @param name A String object that represents a query name used to search for a Person object.
      * @return A Person object in the Session class that has a matching name.
@@ -252,7 +214,7 @@ public class Session implements Serializable, Comparable<Session> {
     }
 
     /**
-     * Returns an ArrayList of Person objects with names that match the provided name list.
+     * Returns an ArrayList of Person objects with names that match the provided name list, ignoring case.
      *
      * @param nameList An array of String objects that represent names of people in the session.
      * @return An ArrayList object containing Person objects with matching names.
@@ -268,11 +230,6 @@ public class Session implements Serializable, Comparable<Session> {
         return personList;
     }
 
-    /**
-     * Adds a Person object to the session.
-     *
-     * @param person A Person object representing a participant of the session.
-     */
     public void addPerson(Person person) {
         personList.addPerson(person);
     }
